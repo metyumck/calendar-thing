@@ -1,0 +1,56 @@
+<section>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="filler col-lg-6 text-center"><h2>{{dayOfTheWeekDate(0) | date : 'MMM'}} <br>{{previousSunday.getDate()}} -
+                    {{dayOfTheWeekDate(6) | date : 'd'}}</h2></div>
+                <div class="day-of-the-week col-lg-6 weekend {{highlightTodayClass(0)}}" >
+                    {{dayOfTheWeekDate(0) | date : 'EEE d'}}
+                    <a popover="Popover" popover-title="Popover Title">
+                        Test<span class="glyphicon glyphicon-plus action-icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="day-of-the-week col-lg-6 {{highlightTodayClass(1)}}">{{dayOfTheWeekDate(1) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+                <div class="day-of-the-week col-lg-6 {{highlightTodayClass(2)}}">{{dayOfTheWeekDate(2) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="day-of-the-week col-lg-6 {{highlightTodayClass(3)}}">{{dayOfTheWeekDate(3) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+                <div class="day-of-the-week col-lg-6 {{highlightTodayClass(4)}}">{{dayOfTheWeekDate(4) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="day-of-the-week col-lg-6 {{highlightTodayClass(5)}}">{{dayOfTheWeekDate(5) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+                <div class="day-of-the-week col-lg-6 weekend {{highlightTodayClass(6)}}">{{dayOfTheWeekDate(6) | date : 'EEE d'}}
+                    <span class="glyphicon glyphicon-plus action-icon"></span>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
