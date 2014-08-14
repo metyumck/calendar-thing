@@ -41,8 +41,21 @@ a {
 .action-icon {
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     top:auto;
     padding:2px;
-
 }
+
+.add-event {
+
+    border:1px solid #000;
+    border-radius:10px;
+    padding: 10px;
+    z-index:500;
+    background-color: #3278b3;
+    opacity:0.9;
+}
+
+/*
+Tooltip modifications
+*/

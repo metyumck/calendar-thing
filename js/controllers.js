@@ -4,7 +4,7 @@
 
 angular.module('calendarThing.controllers', [])
 
-    .controller('CalendarCtrl', ['$scope', function($scope) {
+    .controller('CalendarCtrl', ['$scope', 'firebaseTest', function($scope, firebaseTest) {
 
         $scope.todaysDate = new Date();
 
@@ -13,6 +13,8 @@ angular.module('calendarThing.controllers', [])
 
         $scope.nextSaturday = new Date();
         $scope.nextSaturday.setDate($scope.previousSunday.getDate() + 6);
+
+
 
         //daynum refers to the number of days
         // after sunday that the day occurs. e.g. Monday would be 1
@@ -32,7 +34,28 @@ angular.module('calendarThing.controllers', [])
                 return "not-today";
             }
 
-        };
+        }
 
+        $scope.saveActivity = function() {
+
+
+
+        }
+
+
+        //TODO: move all Firebase connection things to their own service modules.
+        $scope.oneRecord = firebaseTest.giveToMePlsActivity("13-08-2014");
+        console.log($scope.oneRecord);
+
+
+
+
+    }]).controller('MainCtrl', ['$scope','firebaseTest','$element', function($scope, firebaseTest, $element) {
+
+        $scope.createCard = function () {
+
+            console.log($element);
+
+        }
 
     }]);
