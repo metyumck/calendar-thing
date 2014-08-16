@@ -122,7 +122,6 @@ angular.module("ngDraggable", [])
 
                     }
                     var onDragComplete = function(evt) {
-
                         if(! onDragSuccessCallback)return;
 
                         scope.$apply(function () {

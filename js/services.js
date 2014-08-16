@@ -16,6 +16,15 @@ angular.module("calendarThing.services", [])
                 return $firebase(firebaseRef).$asObject();
 
 
+            },
+
+            giveToMePlsActivities: function (entryDate) {
+
+                var firebaseRef = new Firebase("https://calendar-thing.firebaseio.com/entry/" + entryDate);
+
+                return $firebase(firebaseRef).$asArray();
+
+
             }
 
         }

@@ -3,10 +3,16 @@
         {{dayOfTheWeekDate(6) | date : 'd'}}</h2></div>
 
     <div id="{{dayOfTheWeekDate(0) | date : 'dd-MM-yyyy'}}" class="day-of-the-week col-md-4 weekend {{highlightTodayClass(0)}}" ><h4>{{dayOfTheWeekDate(0) | date : 'EEE d'}}</h4>
-        {{oneRecord.activity}}
     </div>
 
-    <div id="{{dayOfTheWeekDate(1) | date : 'dd-MM-yyyy'}}" class="day-of-the-week col-md-4 {{highlightTodayClass(1)}}"><h4>{{dayOfTheWeekDate(1) | date : 'EEE d'}}</h4>
+    <div id="monday" data-date="{{dayOfTheWeekDate(1) | date : 'ddMMyyyy'}}" class="day-of-the-week col-md-4 {{highlightTodayClass(1)}}" ng-drop="true" ng-drop-success="onDropComplete($data,{{dayOfTheWeekDate(1) | date : 'ddMMyyyy'}})">
+        <h4>{{dayOfTheWeekDate(1) | date : 'EEE d'}}</h4>
+        <input type="hidden" value="{{dayOfTheWeekDate(1) | date : 'dd-MM-yyyy'}}" ng-model="createdCardValue.date" >
+        <div ng-repeat="obj in droppedObjects" class="activity">
+            <h6>Activity</h6>{{obj.activity}}<br>
+            <h6>Time</h6>{{obj.time}}
+            <span class="glyphicon glyphicon-remove-circle remove-icon" ng-click="removeActivity(obj.$id)"></span>
+        </div>
     </div>
 
     <div class="day-of-the-week col-md-4 {{highlightTodayClass(2)}}"><h4>{{dayOfTheWeekDate(2) | date : 'EEE d'}}</h4>

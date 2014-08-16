@@ -36,26 +36,52 @@ angular.module('calendarThing.controllers', [])
 
         }
 
-        $scope.saveActivity = function() {
+    }]).controller('MainCtrl', ['$scope','firebaseTest','$element','$compile', '$http', '$templateCache', function($scope, firebaseTest, $element, $compile, $http, $templateCache) {
 
+        $scope.dropDate = "";
+        $scope.mondayDate = ;
+        $scope.mondayActivities = ;
+
+        $http.get("partials/addEventTemplate.html").success(function (data) {
+
+            $scope.compiledSection = $compile(data)($scope);
+
+
+        });
+
+
+        $scope.createCard = function () {
+
+            $http.get("partials/addEventTemplate.html").success(function (data) {
+                $scope.compiledSection = $compile(data)($scope);
+            });
+
+            $element.children('div').append($scope.compiledSection);
+
+        }
+
+        $scope.onDragComplete = function (data, event) {
+
+            console.log(data);
 
 
         }
 
+        $scope.onDropComplete = function (data, date) {
+            $scope.dropDate = date;
+            $scope.droppedObjects = firebaseTest.giveToMePlsActivities($scope.dropDate);
+            $scope.droppedObjects.$add(angular.copy(data));
 
-        //TODO: move all Firebase connection things to their own service modules.
-        $scope.oneRecord = firebaseTest.giveToMePlsActivity("13-08-2014");
-        console.log($scope.oneRecord);
+            console.log("Signal 1" + data.activity);
+            console.log("Signal 2" + event)
 
 
+        }
 
+        $scope.removeActivity = function (id) {
 
-    }]).controller('MainCtrl', ['$scope','firebaseTest','$element', function($scope, firebaseTest, $element) {
-
-        $scope.createCard = function () {
-
-            console.log($element);
-
+            var itemToRemove = $scope.droppedObjects.$getRecord(id);
+            $scope.droppedObjects.$remove(itemToRemove);
         }
 
     }]);

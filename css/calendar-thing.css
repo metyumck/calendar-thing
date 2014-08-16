@@ -49,12 +49,30 @@ a {
 .add-event {
 
     border:1px solid #000;
+    width:200px;
     border-radius:10px;
     padding: 10px;
     z-index:500;
-    background-color: #3278b3;
+    background-color: #f8f8f8;
     opacity:0.9;
 }
+
+.activity {
+
+    display:inline-block;
+    border-radius:10px;
+    border: 2px solid orange;
+
+}
+
+.remove-icon {
+
+    color:orangered;
+    cursor:pointer;
+
+}
+
+
 
 /*
 Tooltip modifications
