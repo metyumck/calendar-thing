@@ -2,16 +2,21 @@
     <div class="filler col-md-12 text-center"><h2>{{dayOfTheWeekDate(0) | date : 'MMM'}} <br>{{previousSunday.getDate()}} -
         {{dayOfTheWeekDate(6) | date : 'd'}}</h2></div>
 
-    <div id="{{dayOfTheWeekDate(0) | date : 'dd-MM-yyyy'}}" class="day-of-the-week col-md-4 weekend {{highlightTodayClass(0)}}" ><h4>{{dayOfTheWeekDate(0) | date : 'EEE d'}}</h4>
+    <div id="sunday" data-date="{{dayOfTheWeekDate(0) | date : 'ddMMyyyy'}}" class="weekend day-of-the-week col-md-4 {{highlightTodayClass(0)}}" ng-drop="true" ng-drop-success="onDropComplete($data,{{dayOfTheWeekDate(0) | date : 'ddMMyyyy'}})">
+        <h4>{{dayOfTheWeekDate(0) | date : 'EEE d'}}</h4>
+        <div ng-repeat="activity in sundayActivities" class="activity btn btn-info">
+            <h6>Activity</h6>{{activity.activityName}}<br>
+            <h6>Time</h6>{{activity.time}}
+            <span class="glyphicon glyphicon-remove remove-icon" ng-click="removeActivity(activity.$id, 'sunday')"></span>
+        </div>
     </div>
 
     <div id="monday" data-date="{{dayOfTheWeekDate(1) | date : 'ddMMyyyy'}}" class="day-of-the-week col-md-4 {{highlightTodayClass(1)}}" ng-drop="true" ng-drop-success="onDropComplete($data,{{dayOfTheWeekDate(1) | date : 'ddMMyyyy'}})">
         <h4>{{dayOfTheWeekDate(1) | date : 'EEE d'}}</h4>
-        <input type="hidden" value="{{dayOfTheWeekDate(1) | date : 'dd-MM-yyyy'}}" ng-model="createdCardValue.date" >
-        <div ng-repeat="obj in droppedObjects" class="activity">
-            <h6>Activity</h6>{{obj.activity}}<br>
-            <h6>Time</h6>{{obj.time}}
-            <span class="glyphicon glyphicon-remove-circle remove-icon" ng-click="removeActivity(obj.$id)"></span>
+        <div ng-repeat="activity in mondayActivities" class="activity btn btn-info">
+            <h6>Activity</h6>{{activity.activityName}}<br>
+            <h6>Time</h6>{{activity.time}}
+            <span class="glyphicon glyphicon-remove-circle remove-icon" ng-click="removeActivity(activity.$id, 'monday')"></span>
         </div>
     </div>
 
@@ -21,19 +26,20 @@
     <div class="day-of-the-week col-md-4 {{highlightTodayClass(3)}}"><h4>{{dayOfTheWeekDate(3) | date : 'EEE d'}}</h4>
     </div>
 
-    <div class="filler col-md-4">
-    </div>
-
     <div class="day-of-the-week col-md-4 {{highlightTodayClass(4)}}"><h4>{{dayOfTheWeekDate(4) | date : 'EEE d'}}</h4>
     </div>
 
-    <div class="day-of-the-week col-md-4 weekend {{highlightTodayClass(5)}}"><h4>{{dayOfTheWeekDate(5) | date : 'EEE d'}}</h4>
+    <div class="day-of-the-week col-md-4  {{highlightTodayClass(5)}}"><h4>{{dayOfTheWeekDate(5) | date : 'EEE d'}}</h4>
     </div>
 
-    <div class="day-of-the-week col-md-4 {{highlightTodayClass(6)}}"><h4>{{dayOfTheWeekDate(6) | date : 'EEE d'}}</h4>
+    <div class="day-of-the-week col-md-4 weekend {{highlightTodayClass(6)}}"><h4>{{dayOfTheWeekDate(6) | date : 'EEE d'}}</h4>
     </div>
 
     <div class="filler col-md-4">
+    </div>
+
+    <div broadcast-page-load="test" class="filler col-md-4">
+        <input type="hidden" ng-model="pageloaded" value="hello" >
     </div>
 
 </section>

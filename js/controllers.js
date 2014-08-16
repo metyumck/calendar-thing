@@ -4,7 +4,7 @@
 
 angular.module('calendarThing.controllers', [])
 
-    .controller('CalendarCtrl', ['$scope', 'firebaseTest', function($scope, firebaseTest) {
+    .controller('CalendarCtrl', ['$scope', function($scope) {
 
         $scope.todaysDate = new Date();
 
@@ -36,29 +36,16 @@ angular.module('calendarThing.controllers', [])
 
         }
 
-    }]).controller('MainCtrl', ['$scope','firebaseTest','$element','$compile', '$http', '$templateCache', function($scope, firebaseTest, $element, $compile, $http, $templateCache) {
+    }]).controller('MainCtrl', ['$scope','firebaseCRUD','$element','$compile', '$http', '$templateCache', function($scope, firebaseCRUD, $element, $compile, $http, $templateCache) {
 
-        $scope.dropDate = "";
-        $scope.mondayDate = ;
-        $scope.mondayActivities = ;
 
-        $http.get("partials/addEventTemplate.html").success(function (data) {
-
-            $scope.compiledSection = $compile(data)($scope);
-
+        $scope.$on("$pageLoaded", function () {
+            $scope.mondayActivities = firebaseCRUD.giveToMePlsActivities($element.find('#monday').attr('data-date'));
+            $scope.sundayActivities = firebaseCRUD.giveToMePlsActivities($element.find('#sunday').attr('data-date'));
 
         });
 
-
-        $scope.createCard = function () {
-
-            $http.get("partials/addEventTemplate.html").success(function (data) {
-                $scope.compiledSection = $compile(data)($scope);
-            });
-
-            $element.children('div').append($scope.compiledSection);
-
-        }
+        $scope.dropDate = "";
 
         $scope.onDragComplete = function (data, event) {
 
@@ -69,19 +56,22 @@ angular.module('calendarThing.controllers', [])
 
         $scope.onDropComplete = function (data, date) {
             $scope.dropDate = date;
-            $scope.droppedObjects = firebaseTest.giveToMePlsActivities($scope.dropDate);
+            $scope.droppedObjects = firebaseCRUD.giveToMePlsActivities($scope.dropDate);
             $scope.droppedObjects.$add(angular.copy(data));
-
-            console.log("Signal 1" + data.activity);
-            console.log("Signal 2" + event)
-
-
+            data.activityName = "";
+            data.details = "";
+            data.time = "";
         }
 
-        $scope.removeActivity = function (id) {
+        $scope.removeActivity = function (id, day) {
 
-            var itemToRemove = $scope.droppedObjects.$getRecord(id);
-            $scope.droppedObjects.$remove(itemToRemove);
+            if (day == 'monday') {
+                var itemToRemove = $scope.mondayActivities.$getRecord(id);
+                $scope.mondayActivities.$remove(itemToRemove);
+            } else if (day == 'sunday') {
+                var itemToRemove = $scope.sundayActivities.$getRecord(id);
+                $scope.sundayActivities.$remove(itemToRemove);
+            }
+
         }
-
     }]);

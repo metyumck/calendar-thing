@@ -48,4 +48,45 @@ angular.module('calendarThing.directives', [])
         }
 
 
-    } ]);
+    } ]).directive('broadcastPageLoad', [function () {
+
+        return {
+            restrict: 'A',
+            scope:'false',
+            link: function (scope, elem, attrs) {
+                scope.$watch('page-loaded', function () {
+
+                    scope.$emit('$pageLoaded');
+
+                });
+            }
+
+        }
+
+    }]).directive('disappearOnEmpty', [function () {
+
+        return {
+            restrict: 'A',
+            scope: 'false',
+            link: function (scope, elem, attrs) {
+                //If the element is self is empty, hide it.
+                //Find all elements with the same name attribute and hide them too:
+                console.log(attrs.disappearOnEmpty);
+                scope.$watch(attrs.disappearOnEmpty, function () {
+                    console.log(elem.val());
+                    if (elem.val() == '') {
+                        elem.hide();
+                        elem.siblings().filter("[name='" + elem.attr("name") + "']").hide();
+                    } else {
+                        elem.show();
+                        elem.siblings().filter("[name='" + elem.attr("name") + "']").show();
+                    }
+
+                })
+
+
+
+            }
+        }
+
+    }]);

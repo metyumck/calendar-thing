@@ -4,7 +4,7 @@
 // this factory returns a synchronized array of chat messages
 angular.module("calendarThing.services", [])
 
-  .factory("firebaseTest", ["$firebase", '$rootScope',
+  .factory("firebaseCRUD", ["$firebase", '$rootScope',
     function($firebase, $rootScope) {
 
         var firebaseMethods = {
@@ -21,7 +21,7 @@ angular.module("calendarThing.services", [])
             giveToMePlsActivities: function (entryDate) {
 
                 var firebaseRef = new Firebase("https://calendar-thing.firebaseio.com/entry/" + entryDate);
-
+                console.log("Firebase reference" + firebaseRef);
                 return $firebase(firebaseRef).$asArray();
 
 

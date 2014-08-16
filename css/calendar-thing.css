@@ -4,11 +4,15 @@ a {
     color: #3278b3;
 }
 
+textarea {
+    resize:none;
+
+}
+
 
 .day-of-the-week {
 
     background-color: #f8f8f8;
-    height: 200px;
     border: 2px solid white;
 }
 
@@ -28,7 +32,6 @@ a {
 
     background-color: #3278b3;
     color: #ffffff;
-    height: 200px;
     border: 2px solid white;
 
 
@@ -58,10 +61,7 @@ a {
 }
 
 .activity {
-
-    display:inline-block;
-    border-radius:10px;
-    border: 2px solid orange;
+    margin:10px;
 
 }
 
@@ -72,7 +72,11 @@ a {
 
 }
 
+.readonly {
 
+    background-color: #f8f8f8;
+    border:none;
+}
 
 /*
 Tooltip modifications
