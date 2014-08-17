@@ -73,7 +73,6 @@ angular.module('calendarThing.directives', [])
                 //Find all elements with the same name attribute and hide them too:
                 console.log(attrs.disappearOnEmpty);
                 scope.$watch(attrs.disappearOnEmpty, function () {
-                    console.log(elem.val());
                     if (elem.val() == '') {
                         elem.hide();
                         elem.siblings().filter("[name='" + elem.attr("name") + "']").hide();

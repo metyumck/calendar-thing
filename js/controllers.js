@@ -42,10 +42,13 @@ angular.module('calendarThing.controllers', [])
         $scope.$on("$pageLoaded", function () {
             $scope.mondayActivities = firebaseCRUD.giveToMePlsActivities($element.find('#monday').attr('data-date'));
             $scope.sundayActivities = firebaseCRUD.giveToMePlsActivities($element.find('#sunday').attr('data-date'));
+            $scope.tuesdayActivities = firebaseCRUD.giveToMePlsActivities($element.find('#tuesday').attr('data-date'));
+
 
         });
 
         $scope.dropDate = "";
+        $scope.errorActivityNameEmpty = '';
 
         $scope.onDragComplete = function (data, event) {
 
@@ -57,21 +60,39 @@ angular.module('calendarThing.controllers', [])
         $scope.onDropComplete = function (data, date) {
             $scope.dropDate = date;
             $scope.droppedObjects = firebaseCRUD.giveToMePlsActivities($scope.dropDate);
-            $scope.droppedObjects.$add(angular.copy(data));
-            data.activityName = "";
-            data.details = "";
-            data.time = "";
+
+            try {
+                $scope.droppedObjects.$add(angular.copy(data));
+            } catch(err) {
+                console.log(err);
+                $scope.errorActivityNameEmpty = "has-error";
+            } finally {
+                data.activityName = "";
+                data.details = "";
+                data.time = "";
+            }
         }
 
         $scope.removeActivity = function (id, day) {
 
-            if (day == 'monday') {
-                var itemToRemove = $scope.mondayActivities.$getRecord(id);
-                $scope.mondayActivities.$remove(itemToRemove);
-            } else if (day == 'sunday') {
+             if (day == 'sunday') {
                 var itemToRemove = $scope.sundayActivities.$getRecord(id);
                 $scope.sundayActivities.$remove(itemToRemove);
+            } else if (day == 'monday') {
+                var itemToRemove = $scope.mondayActivities.$getRecord(id);
+                $scope.mondayActivities.$remove(itemToRemove);
+            } else if (day == 'tuesday') {
+                var itemToRemove = $scope.tuesdayActivities.$getRecord(id);
+                $scope.tuesdayActivities.$remove(itemToRemove);
             }
 
         }
+
+
+
+    }]).controller('ModalCtrl', ['$scope','$modal', function () {
+
+
+
+
     }]);

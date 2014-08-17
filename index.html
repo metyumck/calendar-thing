@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/calendar-thing.css" rel="stylesheet">
+    <link href="css/bootstrap-clockpicker.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,28 +20,45 @@
 </head>
 <body ng-controller="MainCtrl">
 
-<div class="jumbotron" >
+<div class="jumbotron" ng-cloak>
     <div class="container">
         <h1>Calendar Thing</h1>
-        <p class="col-md-5">Fill out the form on the right and then stick the card on the day that it is happening!<br><br><br>
-            <form role="form" class="form-inline">
-                <div class="form-group"><input class="form-control" type="text" placeholder="Activity" ng-model="createCardValue.activityName"></div>
-                <div class="form-group"><textarea class="form-control" ng-model="createCardValue.details" placeholder="Details"></textarea></div>
-                <div class="form-group"><input class="form-control" type="text" placeholder="Time" ng-model="createCardValue.time"></div>
-            </form>
-        </p>
+        <div class="col-md-9"><p>Fill out the details of an activity below and then stick the blue card on the day that it is happening!</p>
+            <form id="add-event-form" role="form">
+                <div class="form-group">
+                    <div class="input-group" ng-class="errorActivityNameEmpty">
+                        <input class="form-control" type="text" placeholder="Activity" ng-model="createCardValue.activityName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <textarea class="form-control" ng-model="createCardValue.details" placeholder="Details"></textarea>
+                    </div>
+                </div>
+                <div class="input-group clockpicker">
+                    <input type="text" class="form-control" ng-model="createCardValue.time" value="09:30">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
 
-        <div class="col-md-3 add-event" ng-drag='true' ng-drag-data='createCardValue'>
+                <!--<div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">Time</div>
+                        <input class="form-control" type="text" ng-model="createCardValue.time" placeholder="hh:mm">
+                    </div>
+                </div>-->
+            </form>
+        </div>
+
+        <div class="col-md-3 add-event" ng-drag='true' ng-drag-data='createCardValue' >
             <form><h6 name="activity">Activity</h6>
                 <input name="activity"  disappear-on-empty="createCardValue.activityName" type="text" class="readonly" value="{{createCardValue.activityName}}" readonly>
                 <h6 name="details">Details</h6>
                 <textarea name="details" disappear-on-empty="createCardValue.details" class="readonly" readonly>{{createCardValue.details}}</textarea>
                 <h6 name="time">What time?</h6>
-                <input type="text" disappear-on-empty="createCardValue.time" name="time" class="readonly" value="{{createCardValue.time}}" readonly><br><br>
+                <input type="text"  disappear-on-empty="createCardValue.time" name="time" class="readonly" value="{{createCardValue.time}}" readonly><br><br>
             </form>
-        </div>
-        <div class="col-md-4">
-
         </div>
 
     </div>
@@ -64,10 +82,21 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js-thirdparty/ui-bootstrap-tpls-0.11.0.min.js"></script>
 <script src="js-thirdparty/ngDraggable.js"></script>
+<script src="js-thirdparty/bootstrap-clockpicker.min.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/directives.js"></script>
 <script src="js/services.js"></script>
+
+<script type="text/javascript">
+    $('.clockpicker').clockpicker({
+        twelvehour: 'true',
+        donetext: 'Done',
+        autoclose: 'true'
+    });
+</script>
+
 </body>
 </html>
+

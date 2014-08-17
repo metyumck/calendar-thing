@@ -51,13 +51,13 @@ textarea {
 
 .add-event {
 
-    border:1px solid #000;
-    width:200px;
-    border-radius:10px;
+    width:130px;
+    border-radius:4px;
     padding: 10px;
     z-index:500;
-    background-color: #f8f8f8;
+    background-color: #5bc0de;
     opacity:0.9;
+    color:white;
 }
 
 .activity {
@@ -74,8 +74,24 @@ textarea {
 
 .readonly {
 
-    background-color: #f8f8f8;
+    background-color: #5bc0de;
     border:none;
+    width:100px;
+}
+
+.form-control {
+
+    width:150px;
+}
+
+.input-group {
+
+    width:450px
+}
+
+.input-group-addon {
+
+    width:80px;
 }
 
 /*
